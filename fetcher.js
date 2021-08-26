@@ -15,8 +15,8 @@ const command = process.argv.splice(2);
 
 const URL = command[0];
 const local = command [1];
-console.log(`URL= `, URL);
-console.log(`local = `, local);
+// console.log(`URL= `, URL);
+// console.log(`local = `, local);
 
 
 
@@ -31,7 +31,7 @@ const fileSize = function (file) {
 const writeFile = function(local, body){
   fs.writeFile(local, body, (err) => {
     if (err) throw err;
-    console.log(`Downloaded and saved ${fileSize} bytes to ${local}`);
+    console.log(`Downloaded and saved ${fileSize(local)} bytes to ${local}`);
   });
 };
 
@@ -40,7 +40,7 @@ const writeFile = function(local, body){
 const download = function(URL) {
 
   request(URL, (error, response, body) => {
-    if (error) return "Error!";
+    if (error) throw error;
     writeFile(local, body);
   });
 };
